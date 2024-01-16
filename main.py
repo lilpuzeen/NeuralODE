@@ -1,4 +1,4 @@
-from functions import *
+from functions import conduct_experiment
 
 # Experimental parameters
 experiment_params = [

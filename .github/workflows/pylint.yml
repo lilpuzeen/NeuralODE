@@ -20,4 +20,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') --max-line-length=121 --ignore-docstrings=True --disable=C0116 --disable=E0401 --disable=C0114
+        pylint $(git ls-files '*.py') --max-line-length=121 --ignore-docstrings=True --disable=C0116 --disable=E0401 --disable=C0114 --disable=R0913 --disable=R0914

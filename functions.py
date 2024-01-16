@@ -6,7 +6,7 @@ from tensorflow.keras.models import Model
 
 
 # Definition of a system of differential equations
-def system(y, t, a, b, c, d):
+def system(y, a, b, c, d):
     y1, y2 = y
     dy1_dt = a * y1 + b * y2
     dy2_dt = c * y1 + d * y2
