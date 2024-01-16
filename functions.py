@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.layers import Dense, Input, Concatenate
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import Adam
 
 
 # Definition of a system of differential equations
@@ -51,17 +50,17 @@ def conduct_experiment(a, b, c, d, experiment_id):
     noisy_data = solution + noise
 
     # Preparing data for training
-    X_train = [noisy_data, time_points.reshape(-1, 1)]
+    x_train = [noisy_data, time_points.reshape(-1, 1)]
     y_train = [np.full((len(time_points), 1), a),
                np.full((len(time_points), 1), b),
                np.full((len(time_points), 1), c),
                np.full((len(time_points), 1), d)]
 
     # Model training
-    neural_ode_model_system.fit(X_train, y_train, epochs=200, verbose=1)
+    neural_ode_model_system.fit(x_train, y_train, epochs=200, verbose=1)
 
     # Prediction of parameters
-    predicted_params = neural_ode_model_system.predict(X_train)
+    predicted_params = neural_ode_model_system.predict(x_train)
 
     # Predicted parameters
     predicted_a, predicted_b, predicted_c, predicted_d = [p.flatten()[0] for p in predicted_params]
