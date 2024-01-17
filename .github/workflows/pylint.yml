@@ -18,6 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pylint
+        pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') --max-line-length=121 --ignore-docstrings=True --disable=C0116 --disable=E0401 --disable=C0114 --disable=R0913 --disable=R0914
+        pylint $(git ls-files '*.py') --max-line-length=121 --disable=R0913 --disable=R0914 --disable=E0401 --disable=E0611

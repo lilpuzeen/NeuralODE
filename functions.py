@@ -1,3 +1,10 @@
+"""
+This module performs all the functionality and calculations in order to accomplish a given task.
+Solution of the system of differential equations, data processing and parameter prediction.
+Also model creation and training.
+"""
+
+from numbers import Real
 from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,21 +12,21 @@ from tensorflow.keras.layers import Dense, Input, Concatenate
 from tensorflow.keras.models import Model
 
 
-# Definition of a system of differential equations
-def system(y, a, b, c, d):
+def system(y: Real, a: Real, b: Real, c: Real, d: Real) -> list[Real]:
+    """Definition of a system of differential equations"""
     y1, y2 = y
     dy1_dt = a * y1 + b * y2
     dy2_dt = c * y1 + d * y2
     return [dy1_dt, dy2_dt]
 
 
-# Function for calculating MSE
-def calculate_mse(y_true, y_pred):
+def calculate_mse(y_true: Real, y_pred: Real) -> Real:
+    """Function for calculating MSE"""
     return np.mean((y_true - y_pred) ** 2)
 
 
-# Definition of the NeuralODE model for the system of equations
-def build_neural_ode_model_system():
+def build_neural_ode_model_system() -> Model:
+    """Definition of the NeuralODE model for the system of equations"""
     input_y = Input(shape=(2,))
     input_t = Input(shape=(1,))
     combined_input = Concatenate()([input_y, input_t])
@@ -38,8 +45,8 @@ neural_ode_model_system = build_neural_ode_model_system()
 neural_ode_model_system.compile(optimizer='adam', loss='mse')
 
 
-# Function for a single experiment
-def conduct_experiment(a, b, c, d, experiment_id):
+def conduct_experiment(a: Real, b: Real, c: Real, d: Real, experiment_id: int) -> None:
+    """Function for a single experiment"""
     # Initial conditions for all experiments
     y0 = [1.0, 2.0]
     time_points = np.linspace(0, 5, 100)
